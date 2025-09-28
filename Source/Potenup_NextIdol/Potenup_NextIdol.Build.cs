@@ -11,7 +11,7 @@ public class Potenup_NextIdol : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core",
 			"CoreUObject", "Engine", "InputCore","HTTP", "EnhancedInput", "Json", 
 			"JsonUtilities", "UMG","Networking",
-			"Sockets", "HttpServer"
+			"Sockets", "HttpServer","DesktopPlatform"
 		});
 		
 
