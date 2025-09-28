@@ -107,6 +107,6 @@ void ATotalScoreTextActor::HandleResponse(FHttpRequestPtr Request, FHttpResponse
 void ATotalScoreTextActor::DisplayFallback()
 {
     const float RandomValue = FMath::FRandRange(0.1f, 1.0f);
-    const FString DisplayText = FString::Printf(TEXT("%.2f"), RandomValue);
+    const FString DisplayText = FString::Printf(TEXT("%.f점"), RandomValue*100);
     PresentScoreText(*this, DisplayText);
 }

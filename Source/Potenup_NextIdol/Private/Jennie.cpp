@@ -13,10 +13,9 @@ void AJennie::BeginPlay()
 {
     Super::BeginPlay();
 
-    SetActorLocation(SongStartLocation);
-
     if (bAutoStartOnBeginPlay)
     {
+        SetActorLocation(SongStartLocation);
         StartSongPerformance();
     }
 }
@@ -29,7 +28,16 @@ void AJennie::StartSongPerformance()
 
         if (UAnimSequence* LoadedAnim = SongAnimation.LoadSynchronous())
         {
-            MeshComponent->PlayAnimation(LoadedAnim, false);
+            MeshComponent->PlayAnimation(LoadedAnim, true);
         }
+    }
+}
+
+void AJennie::NotifySongStarted(int32 SongIndex)
+{
+    if (SongIndex == TargetSongIndex)
+    {
+        SetActorLocation(SongStartLocation);
+        StartSongPerformance();
     }
 }
