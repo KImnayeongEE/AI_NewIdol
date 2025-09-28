@@ -8,7 +8,12 @@ public class Potenup_NextIdol : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","HTTP", "Json", "JsonUtilities", "UMG" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core",
+			"CoreUObject", "Engine", "InputCore","HTTP", "EnhancedInput", "Json", 
+			"JsonUtilities", "UMG","Networking",
+			"Sockets", "HttpServer"
+		});
+		
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "TextToSpeech"});
 
