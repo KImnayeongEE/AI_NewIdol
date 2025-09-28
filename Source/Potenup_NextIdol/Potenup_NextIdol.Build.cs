@@ -8,9 +8,9 @@ public class Potenup_NextIdol : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","HTTP", "Json", "JsonUtilities", "UMG" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "TextToSpeech", "TextToSpeech" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "TextToSpeech"});
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
