@@ -62,8 +62,6 @@ void AJennie::StartSongPerformance()
         if (UAnimSequence* LoadedAnim = SongAnimation.LoadSynchronous())
         {
             MeshComponent->PlayAnimation(LoadedAnim, true);
-            // Start from frame 1551. Assuming 30 FPS, this is 51.7 seconds.
-            MeshComponent->SetPosition(1551.0f / 30.0f);
             UE_LOG(LogTemp, Log, TEXT("Animation started: %s"), *LoadedAnim->GetName());
         }
         else
@@ -74,8 +72,6 @@ void AJennie::StartSongPerformance()
             if (UAnimSequence* DirectAnim = LoadObject<UAnimSequence>(nullptr, JennieInternal::LikeJennieAnimAssetPath))
             {
                 MeshComponent->PlayAnimation(DirectAnim, true);
-                // Start from frame 1551. Assuming 30 FPS, this is 51.7 seconds.
-                MeshComponent->SetPosition(1551.0f / 30.0f);
                 UE_LOG(LogTemp, Log, TEXT("Animation loaded via direct method"));
             }
         }

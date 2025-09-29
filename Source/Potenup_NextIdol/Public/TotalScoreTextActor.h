@@ -25,7 +25,7 @@ private:
     float PollInterval = 5.f;
 
     UPROPERTY(EditAnywhere, Category="Polling", meta=(AllowPrivateAccess="true"))
-    FString EndpointUrl = TEXT("http://127.0.0.1:4000/ai/eval2");
+    FString EndpointUrl = TEXT("http://172.16.100.57:8000/docs#/default/upload_status_post");
 
     FTimerHandle PollTimer;
 };
