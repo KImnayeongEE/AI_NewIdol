@@ -16,6 +16,28 @@ namespace
     constexpr float FinalScoreTextWorldSize = 100.f;
     constexpr float ScoreTextCameraOffset = 250.f;
 
+    FString ScoreLabelForValue(float ScoreValue)
+    {
+        const float ClampedScore = FMath::Clamp(ScoreValue, 0.f, 100.f);
+
+        if (ClampedScore >= 71.f)
+        {
+            return TEXT("GOOD");
+        }
+
+        if (ClampedScore >= 51.f)
+        {
+            return TEXT("NORMAL");
+        }
+
+        if (ClampedScore >= 1.f)
+        {
+            return TEXT("MISS");
+        }
+
+        return TEXT("MISS");
+    }
+
     void PositionActorInFrontOfCamera(ATotalScoreTextActor& Actor)
     {
         if (UWorld* World = Actor.GetWorld())
@@ -94,7 +116,7 @@ void ATotalScoreTextActor::HandleResponse(FHttpRequestPtr Request, FHttpResponse
             double TotalValue = 0.0;
             if (JsonObject->TryGetNumberField(TEXT("total"), TotalValue))
             {
-                const FString DisplayText = FString::Printf(TEXT("%.2f"), static_cast<float>(TotalValue));
+                const FString DisplayText = ScoreLabelForValue(static_cast<float>(TotalValue));
                 PresentScoreText(*this, DisplayText);
                 return;
             }
@@ -107,6 +129,24 @@ void ATotalScoreTextActor::HandleResponse(FHttpRequestPtr Request, FHttpResponse
 void ATotalScoreTextActor::DisplayFallback()
 {
     const float RandomValue = FMath::FRandRange(0.1f, 1.0f);
-    const FString DisplayText = FString::Printf(TEXT("%.f"), RandomValue*100);
+    FString DisplayText;
+
+    if (RandomValue <= 0.3f)
+    {
+        DisplayText = TEXT("MISS");
+    }
+    else if (RandomValue <= 0.7f)
+    {
+        DisplayText = TEXT("NORMAL");
+    }
+    else
+    {
+        DisplayText = TEXT("GOOD");
+    }
+
     PresentScoreText(*this, DisplayText);
 }
+
+
+
+

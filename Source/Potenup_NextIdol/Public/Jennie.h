@@ -11,27 +11,39 @@ class POTENUP_NEXTIDOL_API AJennie : public ACharacter
 {
     GENERATED_BODY()
 
-public:
-    AJennie();
-
-    UFUNCTION(BlueprintCallable, Category="Performance")
-    void StartSongPerformance();
-
-    UFUNCTION(BlueprintCallable, Category="Performance")
-    void NotifySongStarted(int32 SongIndex);
-
 protected:
     virtual void BeginPlay() override;
 
-    UPROPERTY(EditAnywhere, Category="Performance", meta=(AllowPrivateAccess="true"))
-    FVector SongStartLocation = FVector(20.f, 510.f, 300.f);
+    // Song animation asset
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+    TSoftObjectPtr<UAnimSequence> SongAnimation;
 
-    UPROPERTY(EditAnywhere, Category="Performance", meta=(AllowPrivateAccess="true"))
-    int32 TargetSongIndex = 2;
+    // Whether to auto-start performance on BeginPlay
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Performance")
+    bool bAutoStartOnBeginPlay;
 
-    UPROPERTY(EditAnywhere, Category="Performance", meta=(AllowPrivateAccess="true"))
-    bool bAutoStartOnBeginPlay = false;
+    // Location where the character should be positioned for the song
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Performance")
+    FVector SongStartLocation;
 
-    UPROPERTY(EditAnywhere, Category="Performance", meta=(AllowPrivateAccess="true"))
-    TSoftObjectPtr<UAnimSequence> SongAnimation = TSoftObjectPtr<UAnimSequence>(FSoftObjectPath(TEXT("/Script/Engine.AnimSequence'/Game/Assets/Animations/likejennie/jennie1_Anim.jennie1_Anim'")));
+    // Target song index to respond to
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Performance")
+    int32 TargetSongIndex;
+
+public:
+    // Called when DMX Previs soundtrack starts
+    UFUNCTION(BlueprintCallable, Category = "Performance")
+    void HandleDMXPrevisSoundtrackStarted(const FString& SoundtrackName);
+
+    // Start the song performance
+    UFUNCTION(BlueprintCallable, Category = "Performance")
+    void StartSongPerformance();
+
+    // Called when a song starts (by index)
+    UFUNCTION(BlueprintCallable, Category = "Performance")
+    void NotifySongStarted(int32 SongIndex);
+
+    
+
+    
 };
